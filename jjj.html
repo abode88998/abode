@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبكة النور نت - تسجيل الدخول</title>
+    <style>
+        /* إعدادات أساسية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* تنسيق الصفحة */
+        body {
+            background-color: #121212;
+            /* أسود داكن */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #ffffff;
+            /* أبيض */
+            transition: background-color 0.3s, color 0.3s;
+            /* انتقال سلس */
+        }
+
+        /* العنوان الرئيسي */
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #ffdd57;
+            /* أصفر فاتح */
+        }
+
+        /* الشريط المتحرك */
+        .marquee {
+            font-size: 24px;
+            color: #0d1117;
+            /* أسود */
+            background-color: #ff6f61;
+            /* أحمر فاتح */
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+            font-weight: bold;
+        }
+
+        /* إيقاف الحركة عند التمرير فوق العنصر */
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* صندوق تسجيل الدخول */
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            background-color: #1f1f1f;
+            /* رمادي داكن */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffdd57;
+            /* أصفر فاتح */
+        }
+
+        /* الحقول */
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ff6f61;
+            /* أحمر فاتح */
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #2a2a2a;
+            /* رمادي داكن */
+            color: #ffffff;
+            /* أبيض */
+        }
+
+        /* زر تسجيل الدخول */
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4caf50;
+            /* أخضر */
+            color: #ffffff;
+            /* أبيض */
+            border: none;
+            border-radius: 8px;
+            /* شكل دائري */
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #388e3c;
+            /* أخضر غامق */
+        }
+
+        /* رسالة نجاح تسجيل الدخول */
+        .success-message {
+            font-size: 24px;
+            color: #00e676;
+            /* أخضر زاهي */
+            margin-top: 20px;
+            display: none;
+            /* مخفي في البداية */
+        }
+
+        /* تنسيق الباقات */
+        .packages {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            display: none;
+            /* مخفي في البداية */
+        }
+
+        .package {
+            background-color: #4caf50;
+            /* أخضر */
+            padding: 15px;
+            border-radius: 8px;
+            width: 120px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s, background-color 0.3s;
+            color: #ffffff;
+            /* أبيض */
+        }
+
+        .package:hover {
+            transform: translateY(-5px);
+            background-color: #388e3c;
+            /* أخضر غامق */
+        }
+
+        .package h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .package p {
+            font-size: 18px;
+        }
+
+        /* رابط تجربة الإنترنت */
+        .trial-link {
+            display: block;
+            margin-top: 15px;
+            color: #ffdd57;
+            /* أصفر فاتح */
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .trial-link:hover {
+            text-decoration: underline;
+        }
+
+        /* زر تغيير الوضع */
+        .toggle-button {
+            padding: 10px;
+            background-color: #ff6f61;
+            /* أحمر فاتح */
+            color: #ffffff;
+            /* أبيض */
+            border: none;
+            cursor: pointer;
+            position: relative;
+            font-size: 16px;
+            border-radius: 50%;
+            /* دائري */
+            width: 50px;
+            /* عرض */
+            height: 50px;
+            /* ارتفاع */
+            transition: background-color 0.3s;
+        }
+
+        .toggle-button:hover {
+            background-color: #e55a53;
+            /* أحمر غامق */
+        }
+
+        /* شكل الهلال */
+        .toggle-button::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            width: 30px;
+            /* عرض الهلال */
+            height: 30px;
+            /* ارتفاع الهلال */
+            background-color: #ffffff;
+            /* لون الهلال */
+            border-radius: 50%;
+            /* شكل دائري */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 100%, 0% 0%);
+            /* تشكيل الهلال */
+            transition: transform 0.3s;
+            /* انتقال الشكل */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- العنوان الرئيسي -->
+    <h1>شبكة النور نت</h1>
+
+    <!-- الشريط المتحرك -->
+    <div class="marquee">لا تستعمل الشبكة فيما لا يرضي الله</div>
+
+    <!-- زر تغيير الوضع -->
+    <button class="toggle-button" id="toggleButton" onclick="toggleTheme()"></button>
+
+    <!-- صندوق تسجيل الدخول -->
+    <div class="login-container" id="loginContainer">
+        <h2 id="loginHeader">تسجيل الدخول</h2>
+        <form id="loginForm" onsubmit="return login()">
+            <input type="text" id="username" class="input-field" placeholder="اسم المستخدم" required>
+            <input type="password" id="password" class="input-field" placeholder="كلمة المرور" required>
+            <button type="submit" class="login-button">تسجيل الدخول</button>
+        </form>
+        <a href="#" id="trialLink" class="trial-link">اضغط هنا لتجربة الانترنت 10 دقائق مجاناً</a>
+        <div id="successMessage" class="success-message">تم تسجيل الدخول بنجاح</div>
+    </div>
+
+    <!-- الباقات -->
+    <div class="packages" id="packages">
+        <div class="package">
+            <h3>1 غيغا</h3>
+            <p>20 ليرة</p>
+        </div>
+        <div class="package">
+            <h3>2 غيغا</h3>
+            <p>30 ليرة</p>
+        </div>
+        <div class="package">
+            <h3>5 غيغا</h3>
+            <p>50 ليرة</p>
+        </div>
+        <div class="package">
+            <h3>10 غيغا</h3>
+            <p>70 ليرة</p>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            // الحصول على اسم المستخدم وكلمة المرور
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // التحقق من صحة البيانات
+            if (username === "abode" && password === "abd") {
+                // إخفاء الحقول ورابط التجربة
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("trialLink").style.display = "none";
+
+                // تغيير النص داخل الصندوق ليعرض رسالة النجاح
+                document.getElementById("loginHeader").style.display = "none";
+                var successMessage = document.getElementById("successMessage");
+                successMessage.style.display = "block";
+                successMessage.style.fontSize = "24px"; // حجم الخط
+
+                // إخفاء الباقات
+                document.getElementById("packages").style.display = "none";
+
+                // منع إرسال النموذج
+                return false;
+            }
+
+            alert("اسم المستخدم أو كلمة المرور خاطئة");
+            return false;
+        }
+
+        // تغيير الوضع بين الفاتح والداكن
+        function toggleTheme() {
+            var body = document.body;
+            var toggleButton = document.getElementById("toggleButton");
+
+            if (body.style.backgroundColor === "rgb(18, 18, 18)") {
+                // وضع الفاتح
+                body.style.backgroundColor = "#f0f0f0"; // رمادي فاتح
+                body.style.color = "#000000"; // أسود
+                document.querySelectorAll('.input-field').forEach(function (input) {
+                    input.style.backgroundColor = '#ffffff'; // أبيض
+                    input.style.color = '#000000'; // أسود
+                });
+                document.querySelectorAll('.login-button, .toggle-button').forEach(function (button) {
+                    button.style.backgroundColor = '#6200ea'; // أرجواني
+                    button.style.color = '#ffffff'; // أبيض
+                });
+                document.querySelectorAll('.package').forEach(function (packageDiv) {
+                    packageDiv.style.backgroundColor = '#e0e0e0'; // رمادي فاتح
+                    packageDiv.style.color = '#000000'; // أسود
+                });
+                toggleButton.innerHTML = ""; // إزالة الأيقونة
+                toggleButton.style.backgroundColor = "#ff6f61"; // إعادة اللون الأحمر الفاتح
+            } else {
+                // العودة إلى الوضع الداكن
+                body.style.backgroundColor = '#121212'; // أسود داكن
+                body.style.color = '#ffffff'; // أبيض
+                document.querySelectorAll('.input-field').forEach(function (input) {
+                    input.style.backgroundColor = '#2a2a2a'; // رمادي داكن
+                    input.style.color = '#ffffff'; // أبيض
+                });
+                document.querySelectorAll('.login-button, .toggle-button').forEach(function (button) {
+                    button.style.backgroundColor = '#4caf50'; // أخضر
+                    button.style.color = '#ffffff'; // أبيض
+                });
+                document.querySelectorAll('.package').forEach(function (packageDiv) {
+                    packageDiv.style.backgroundColor = '#4caf50'; // أخضر
+                    packageDiv.style.color = '#ffffff'; // أبيض
+                });
+                toggleButton.innerHTML = ""; // إزالة الأيقونة
+                toggleButton.style.backgroundColor = "#ff6f61"; // إعادة اللون الأحمر الفاتح
+            }
+        }
+    </script>
+</body>
+
+</html>
